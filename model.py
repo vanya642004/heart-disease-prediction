@@ -1,18 +1,13 @@
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, accuracy_score
+import pickle
+import os
 
-def train_and_predict(df):
-    X = df.drop('Heart Disease', axis=1)
-    y = df['Heart Disease']
+def predict_from_inputs(input_data):
+    model_path = "model.pkl"
+    if not os.path.exists(model_path):
+        raise FileNotFoundError("Model file not found. Train the model and upload model.pkl.")
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    with open(model_path, "rb") as f:
+        model = pickle.load(f)
 
-    model = RandomForestClassifier(n_estimators=100, random_state=42)
-    model.fit(X_train, y_train)
-    y_pred = model.predict(X_test)
-
-    return {
-        "accuracy": round(accuracy_score(y_test, y_pred), 3),
-        "report": classification_report(y_test, y_pred, output_dict=True)
-    }
+    prediction = model.predict([input_data])
+    return prediction[0]
