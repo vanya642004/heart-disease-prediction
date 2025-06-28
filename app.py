@@ -5,7 +5,7 @@ import streamlit as st
 st.title("Heart Disease Prediction")
 
 # Load dataset directly from GitHub repo
-df = load_and_clean_data("Heart_Disease_Prediction(2).csv")
+df = load_and_clean_data("Heart_Disease_Prediction (2).csv")
 display_eda(df)
 
 if st.button("Run Prediction"):
