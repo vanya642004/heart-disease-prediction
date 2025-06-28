@@ -1,15 +1,13 @@
 import streamlit as st
-from utils import preprocess_data, show_insights
-from model import load_model, make_prediction
+from utils import load_and_clean_data, display_eda
+from model import train_and_predict
 
-st.title("Intelligent Database System for E-Commerce")
+st.title("Heart Disease Prediction App")
 
-uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
-if uploaded_file is not None:
-    df = preprocess_data(uploaded_file)
-    show_insights(df)
-
-    model = load_model()
-    if st.button("Predict"):
-        prediction = make_prediction(df, model)
-        st.write("Prediction Results:", prediction)
+uploaded_file = st.file_uploader("Upload your Heart Dataset", type=["csv"])
+if uploaded_file:
+    df = load_and_clean_data(uploaded_file)
+    display_eda(df)
+    prediction = train_and_predict(df)
+    st.write("Model Evaluation Metrics:")
+    st.json(prediction)
