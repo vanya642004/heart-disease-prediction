@@ -1,11 +1,16 @@
 import pandas as pd
 import streamlit as st
 
-def preprocess_data(uploaded_file):
-    df = pd.read_csv(uploaded_file)
-    st.write("Data Preview", df.head())
+def load_and_clean_data(filepath):
+    df = pd.read_csv(filepath)
+    df['ST depression'] = df['ST depression'].astype(int)
+    df['Heart Disease'] = df['Heart Disease'].map({'Presence': 1, 'Absence': 0})
     return df
 
-def show_insights(df):
-    st.write("Summary Stats", df.describe())
-    st.write("Null Values", df.isnull().sum())
+def display_eda(df):
+    st.subheader("Dataset Preview")
+    st.write(df.head())
+    st.subheader("Summary Statistics")
+    st.write(df.describe())
+    st.subheader("Missing Values")
+    st.write(df.isnull().sum())
