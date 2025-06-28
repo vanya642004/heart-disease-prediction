@@ -1,13 +1,13 @@
-import streamlit as st
 from utils import load_and_clean_data, display_eda
 from model import train_and_predict
+import streamlit as st
 
-st.title("Heart Disease Prediction App")
+st.title("Heart Disease Prediction")
 
-uploaded_file = st.file_uploader("Upload your Heart Dataset", type=["csv"])
-if uploaded_file:
-    df = load_and_clean_data(uploaded_file)
-    display_eda(df)
-    prediction = train_and_predict(df)
-    st.write("Model Evaluation Metrics:")
-    st.json(prediction)
+# Load dataset directly from GitHub repo
+df = load_and_clean_data("Heart_Disease_Prediction.csv")
+display_eda(df)
+
+if st.button("Run Prediction"):
+    result = train_and_predict(df)
+    st.json(result)
