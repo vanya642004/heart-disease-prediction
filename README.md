@@ -1,11 +1,12 @@
-# Intelligent DBMS for E-Commerce
+# Heart Disease Prediction App
 
-This project is a Streamlit-based app for intelligent prediction using uploaded e-commerce datasets.
+A Streamlit web app that predicts the presence of heart disease based on clinical data.
 
 ## Features
-- Upload and analyze CSV files
-- Run predictions with pre-trained models
-- Visualize insights
+- Upload CSV file with patient data
+- Cleans and preprocesses data
+- Trains Logistic Regression model
+- Displays evaluation metrics
 
 ## Run Locally
 ```bash
